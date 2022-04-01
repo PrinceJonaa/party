@@ -6,10 +6,14 @@ import logger from 'morgan'
 import cors from 'cors'
 
 import { router as authRouter } from './routes/auth.js'
+import { router as postsRouter } from "./routes/posts.js";
+
 
 import('./config/database.js')
 
 const app = express()
+
+
 
 app.use(
   express.static(
@@ -21,6 +25,7 @@ app.use(logger('dev'))
 app.use(express.json())
 
 app.use('/api/auth', authRouter)
+app.use("/api/posts", postsRouter);
 
 app.get('/*', function (req, res) {
   res.sendFile(
